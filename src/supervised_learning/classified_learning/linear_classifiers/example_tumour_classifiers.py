@@ -72,7 +72,7 @@ def main():
                                                                    )
     standard_scaler = StandardScaler()
     x_train = standard_scaler.fit_transform(x_train)
-    x_test = standard_scaler.fit_transform(x_test)
+    x_test = standard_scaler.transform(x_test)
 
     logistic_regression = LogisticRegression()
     logistic_regression.fit(x_train, y_train)

@@ -26,7 +26,7 @@ def main():
 
     dict_vectorizer = DictVectorizer(sparse=False)
     x_train = dict_vectorizer.fit_transform(x_train.to_dict(orient='record'))
-    x_test = dict_vectorizer.fit_transform(x_test.to_dict(orient='record'))
+    x_test = dict_vectorizer.transform(x_test.to_dict(orient='record'))
 
     decision_tree_classifier = DecisionTreeClassifier()
     utils.get_trained_result(decision_tree_classifier, x_test, x_train, y_test, y_train)

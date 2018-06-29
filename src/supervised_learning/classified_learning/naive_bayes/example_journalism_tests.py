@@ -24,7 +24,7 @@ def main():
                                                                          )
     count_vectorizer = CountVectorizer()
     x_train = count_vectorizer.fit_transform(x_train)
-    x_test = count_vectorizer.fit_transform(x_test)
+    x_test = count_vectorizer.transform(x_test)
 
     multinomial_nb = MultinomialNB()
     multinomial_nb.fit(x_train, y_train)
