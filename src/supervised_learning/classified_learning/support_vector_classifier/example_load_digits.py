@@ -20,7 +20,7 @@ def main():
     linear_svc = LinearSVC()
     linear_svc.fit(x_train, y_train)
     predict_result = linear_svc.predict(x_test)
-    utils.get_train_score(linear_svc, x_test, y_test, predict_result)
+    utils.get_train_model_score(linear_svc, x_test, y_test, predict_result)
 
 
 if __name__ == '__main__':

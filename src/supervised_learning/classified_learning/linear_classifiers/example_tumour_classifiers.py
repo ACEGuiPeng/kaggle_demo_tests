@@ -44,7 +44,7 @@ def preprocess_data():
 
     :return:
     """
-    data_file = 'datasets/breast-cancer-wisconsin.data.csv'
+    data_file = 'dataset/breast-cancer-wisconsin.data.csv'
     data = pandas.read_csv(data_file, names=cn_column_names)
     print(data)
     # 替换异常值为缺失值na
@@ -72,12 +72,12 @@ def main():
     logistic_regression = LogisticRegression()
     logistic_regression.fit(x_train, y_train)
     lr_predict_result = logistic_regression.predict(x_test)
-    utils.get_train_score(logistic_regression, x_test, y_test, lr_predict_result)
+    utils.get_train_model_score(logistic_regression, x_test, y_test, lr_predict_result)
 
     sgd_classifier = SGDClassifier()
     sgd_classifier.fit(x_train, y_train)
     sgdc_predict_result = sgd_classifier.predict(x_test)
-    utils.get_train_score(sgd_classifier, x_test, y_test, sgdc_predict_result)
+    utils.get_train_model_score(sgd_classifier, x_test, y_test, sgdc_predict_result)
 
 
 if __name__ == '__main__':
