@@ -21,7 +21,11 @@ def main():
     print(news.data[0])
 
     x_train, x_test, y_train, y_test = utils.prepare_train_and_test_sets(news.data, news.target,
-                                                                         fit_model=CountVectorizer())
+                                                                         )
+    count_vectorizer = CountVectorizer()
+    x_train = count_vectorizer.fit_transform(x_train)
+    x_test = count_vectorizer.fit_transform(x_test)
+
     multinomial_nb = MultinomialNB()
     multinomial_nb.fit(x_train, y_train)
     predict_result = multinomial_nb.predict(x_test)

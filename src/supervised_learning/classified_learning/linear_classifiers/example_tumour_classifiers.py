@@ -13,6 +13,7 @@ import pandas
 from sklearn.linear_model import LogisticRegression
 from sklearn.linear_model import SGDClassifier
 from sklearn.metrics import classification_report
+from sklearn.preprocessing import StandardScaler
 
 from common import utils
 from common.utils import prepare_train_and_test_sets
@@ -69,6 +70,10 @@ def main():
     x_train, x_test, y_train, y_test = prepare_train_and_test_sets(processed_data[cn_column_names[1:10]],
                                                                    processed_data[cn_column_names[10]],
                                                                    )
+    standard_scaler = StandardScaler()
+    x_train = standard_scaler.fit_transform(x_train)
+    x_test = standard_scaler.fit_transform(x_test)
+
     logistic_regression = LogisticRegression()
     logistic_regression.fit(x_train, y_train)
     lr_predict_result = logistic_regression.predict(x_test)

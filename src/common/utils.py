@@ -12,7 +12,6 @@ import random
 
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
 
 
 def get_model_name(model):
@@ -25,11 +24,9 @@ def get_random_seed():
     return random_num
 
 
-def prepare_train_and_test_sets(x_data, y_data, random_state=get_random_seed(), test_percent=0.25,
-                                fit_model=StandardScaler()):
+def prepare_train_and_test_sets(x_data, y_data, random_state=get_random_seed(), test_percent=0.25):
     """准备训练数据和测试数据
 
-    :param fit_model: 标准化数据
     :param x_data:  输入数据
     :param y_data:　输出数据
     :param random_state:    随机数种子
@@ -39,13 +36,7 @@ def prepare_train_and_test_sets(x_data, y_data, random_state=get_random_seed(), 
     x_train, x_test, y_train, y_test = train_test_split(x_data, y_data, test_size=test_percent,
                                                         random_state=random_state)
 
-    # 标准化数据
-    # 保证每个维度的特征数据方差为1,均值为0。使得预测结果不会
-    # 被某些维度过大的特征值而主导
-    standard_x_train = fit_model.fit_transform(x_train)
-    standard_x_test = fit_model.fit_transform(x_test)
-
-    return standard_x_train, standard_x_test, y_train, y_test
+    return x_train, x_test, y_train, y_test
 
 
 def get_train_model_prediction(trained_model, x_train, y_train, x_test):
@@ -59,3 +50,8 @@ def get_train_model_score(trained_model, x_test, y_test, predict_result):
     model_name = get_model_name(trained_model)
     print('Accuracy of {}: {}'.format(model_name, trained_model.score(x_test, y_test)))
     print('Precision of {}:\n {}'.format(model_name, classification_report(y_test, predict_result)))
+
+
+def get_trained_result(training_model, x_test, x_train, y_test, y_train):
+    trained_model, predict_result = get_train_model_prediction(training_model, x_train, y_train, x_test)
+    get_train_model_score(trained_model, x_test, y_test, predict_result)
