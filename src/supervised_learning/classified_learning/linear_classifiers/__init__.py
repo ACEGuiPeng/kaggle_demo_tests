@@ -6,5 +6,5 @@
 # @Version: 
 # @File: __init__.py.py
 # @Contact: aceguipeng@gmail.com
-# @desc:
+# @desc: 线性分类器
 '''

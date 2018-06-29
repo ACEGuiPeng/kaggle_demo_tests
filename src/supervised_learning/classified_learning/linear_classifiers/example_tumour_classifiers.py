@@ -68,23 +68,16 @@ def main():
     processed_data = preprocess_data()
     x_train, x_test, y_train, y_test = prepare_train_and_test_sets(processed_data[cn_column_names[1:10]],
                                                                    processed_data[cn_column_names[10]],
-                                                                   random_state=utils.get_random_seed())
+                                                                   )
     logistic_regression = LogisticRegression()
     logistic_regression.fit(x_train, y_train)
     lr_predict_result = logistic_regression.predict(x_test)
-    get_train_score(logistic_regression, x_test, y_test, lr_predict_result)
+    utils.get_train_score(logistic_regression, x_test, y_test, lr_predict_result)
 
     sgd_classifier = SGDClassifier()
     sgd_classifier.fit(x_train, y_train)
     sgdc_predict_result = sgd_classifier.predict(x_test)
-    get_train_score(sgd_classifier, x_test, y_test, sgdc_predict_result)
-
-
-def get_train_score(trained_model, x_test, y_test, predict_result):
-    """获取模型的训练评估结果"""
-    model_name = utils.get_model_name(trained_model)
-    print('Accuracy of {}: {}'.format(model_name, trained_model.score(x_test, y_test)))
-    print('Precision of {}:\n {}'.format(model_name, classification_report(y_test, predict_result)))
+    utils.get_train_score(sgd_classifier, x_test, y_test, sgdc_predict_result)
 
 
 if __name__ == '__main__':
